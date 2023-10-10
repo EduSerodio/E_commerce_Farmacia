@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using farmacia.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace farmacia.Data
@@ -10,5 +7,11 @@ namespace farmacia.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Produto>().ToTable("tb_produtos");
+        }
+        public DbSet<Produto> Produtos { get; set; } = null!;
+
     }
 }

@@ -1,4 +1,9 @@
 using farmacia.Data;
+using farmacia.Model;
+using farmacia.Service;
+using farmacia.Service.Implements;
+using farmacia.Validator;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +19,13 @@ var connectionString = builder.Configuration.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
+
+// Validação das Entidades
+builder.Services.AddTransient<IValidator<Produto>, ProdutoValidator>();
+
+// Registrar as Classes e Interfaces Service
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
