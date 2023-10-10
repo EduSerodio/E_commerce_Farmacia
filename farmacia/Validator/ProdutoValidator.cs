@@ -11,7 +11,7 @@ namespace farmacia.Validator
                     .NotEmpty()
                     .MinimumLength(4)
                     .MaximumLength(100);
-            RuleFor(p => p.Tipo)
+            RuleFor(p => p.Descricao)
                     .NotEmpty()
                     .MinimumLength(5)
                     .MaximumLength(1000);
