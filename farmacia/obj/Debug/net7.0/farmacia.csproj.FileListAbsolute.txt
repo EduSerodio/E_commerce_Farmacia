@@ -75,3 +75,7 @@
 /home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/obj/Debug/net7.0/farmacia.pdb
 /home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/obj/Debug/net7.0/farmacia.genruntimeconfig.cache
 /home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/obj/Debug/net7.0/ref/farmacia.dll
+/home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/bin/Debug/net7.0/Newtonsoft.Json.dll
+/home/eduardo/Área de Trabalho/Generation/E-commerce_Farmacia/farmacia/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll

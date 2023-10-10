@@ -20,11 +20,11 @@ namespace farmacia.Model
 
         [Column(TypeName = "varchar")]
         [StringLength(100)]
-        public string Tipo { get; set; } = string.Empty;
+        public string Descricao { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal")]
         [Precision(20,2)]
         public decimal Preco { get; set; }
-
+        public virtual Categoria? Categoria { get; set; }
     }
 }

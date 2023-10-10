@@ -15,7 +15,8 @@ namespace farmacia.Service.Implements
 
         public async Task<IEnumerable<Produto>> GetAll()
         {
-            return await _context.Produtos
+             return await _context.Produtos
+                .Include(p => p.Categoria)
                 .ToListAsync();
         }
 
@@ -24,7 +25,8 @@ namespace farmacia.Service.Implements
             try
             {
                 var Produto = await _context.Produtos
-                            .FirstAsync(i => i.Id == id);
+                    .Include(p => p.Categoria)
+                    .FirstAsync(i => i.Id == id);
                 return Produto;
             }
             catch
@@ -36,12 +38,25 @@ namespace farmacia.Service.Implements
         public async Task<IEnumerable<Produto>> GetByNome(string nome)
         {
             return await _context.Produtos
-                .Where(p => p.Nome.Contains(nome))
+                .Include(t => t.Categoria)
+                .Where(produto => produto.Nome.Contains(nome))
                 .ToListAsync();
         }
-        
+
         public async Task<Produto?> Create(Produto produto)
         {
+            if(produto.Categoria is not null)
+            {
+                var BuscaProduto = await _context.Categorias.FindAsync(produto.Categoria.Id);
+
+                if(BuscaProduto is null)
+                {
+                    return null;
+                }
+
+                produto.Categoria = BuscaProduto;
+            }
+
             await _context.Produtos.AddAsync(produto);
             await _context.SaveChangesAsync();
 
@@ -55,7 +70,20 @@ namespace farmacia.Service.Implements
             if(ProdutoUpdate is null) 
             {
                 return null;
-            }   
+            }
+
+            if (produto.Categoria is not null)
+            {
+                var BuscaCategoria = await _context.Produtos.FindAsync(produto.Categoria.Id);
+
+                if (BuscaCategoria is null)
+                {
+                    return null;
+                }
+            }
+
+            produto.Categoria = produto.Categoria is not null ? _context.Categorias.FirstOrDefault(c => c.Id == produto.Categoria.Id) : null;
+
             _context.Entry(ProdutoUpdate).State = EntityState.Detached;
             _context.Entry(produto).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -68,6 +96,6 @@ namespace farmacia.Service.Implements
             _context.Remove(produto);
             await _context.SaveChangesAsync();
         }
-        
+
     }
 }
